@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_24_093655) do
+ActiveRecord::Schema.define(version: 2021_05_01_062234) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,11 @@ ActiveRecord::Schema.define(version: 2021_04_24_093655) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "instruments", force: :cascade do |t|
     t.string "brand"
     t.string "model"
@@ -44,6 +49,16 @@ ActiveRecord::Schema.define(version: 2021_04_24_093655) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer "instrument_id", null: false
+    t.integer "cart_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity", default: 1
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["instrument_id"], name: "index_line_items_on_instrument_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,4 +75,6 @@ ActiveRecord::Schema.define(version: 2021_04_24_093655) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "instruments"
 end
