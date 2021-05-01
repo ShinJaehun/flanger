@@ -1,5 +1,7 @@
 document.addEventListener("turbolinks:load", function() {
 
+  alert('이 자바스크립트가 정상적으로 작동하니?');
+
   var instrumentImage = document.querySelector('.instrument-image');
 
   function handleFileSelect(evt) {

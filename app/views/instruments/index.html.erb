@@ -15,7 +15,7 @@
 
     <div class="instrument border-light">
       <div class="instrument-thumb">
-      <%= link_to image_tag(instrument.image_url(:thumb)), instrument %>
+      <%= link_to image_tag(instrument.thumb), instrument %>
       <% if instrument.condition? %>
         <div class="condition">
           <span class="tag is-dark"><%= instrument.condition %></span>
